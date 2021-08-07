@@ -7,6 +7,10 @@ html(lang="en")
 		title Fortune Wheel
 		link(rel="stylesheet", href="assets/css/style.css")
 	body
+		//- to load wav files in advance
+		audio(style="display: none;" preload)
+			source(src="assets/misc/win.wav")
+			source(src="assets/misc/wheel.wav")
 		.welcomemodal.toanimate
 		.welcomemodal__content.toanimate
 			.line__container
@@ -43,4 +47,4 @@ html(lang="en")
 			.resultpopup__footer
 				#resetwheelbtn.resultpopup__resetbtn reset the wheel!
 
-		script(src="assets/js/bundle.min.js") 
+		script(src="assets/js/bundle.min.js" defer) 
