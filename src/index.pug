@@ -8,9 +8,8 @@ html(lang="en")
 		link(rel="stylesheet", href="assets/css/style.css")
 	body
 		//- to load wav files in advance
-		audio(style="display: none;" preload)
-			source(src="assets/misc/win.wav")
-			source(src="assets/misc/wheel.wav")
+		audio(style="display: none;" preload src="assets/misc/win.wav")
+		audio(style="display: none;" preload src="assets/misc/wheel.wav")
 		.welcomemodal.toanimate
 		.welcomemodal__content.toanimate
 			.line__container

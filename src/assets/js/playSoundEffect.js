@@ -1,5 +1,5 @@
 const playSoundEffect = (miscname) => {
-    let spinMisc = new Audio(`assets/misc/${miscname}.wav`)
+    let spinMisc = document.querySelector(`audio[src="assets/misc/${miscname}.wav"]`)
     spinMisc.play()
 }
 
