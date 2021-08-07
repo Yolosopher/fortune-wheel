@@ -1,0 +1,323 @@
+@import _vars
+@import _defaults
+
+
+html
+	--p: 3.141592653589793
+	--bazier: cubic-bezier(.03,1.84,.92,1.72), opacity 1.2s ease-out
+.welcomemodal
+	color: #fff
+	position: fixed
+	width: 100%
+	height: 100vh
+	top: 0
+	right: 0
+	background: darkblue
+	clip-path: polygon(25% 0%, 100% 0%, 100% 25%, 100% 100%, 25% 100%, 25% 100%, 0% 100%, 0% 0%)
+	z-index: 20
+	opacity: 1
+	// dev
+	// transform: translateX(101%)
+
+	&.animstart
+
+		animation: welcome 1.5s linear forwards
+		animation-delay: 1s
+	&.animend
+		transform: translateX(101%)
+		opacity: 0
+	&__content
+		color: #fff
+		position: fixed
+		width: 100%
+		height: 100vh
+		top: 0
+		right: 0
+		z-index: 10
+		display: grid
+		grid-gap: 10px
+		grid-auto-rows: 100px
+		justify-items: center
+		align-content: center
+		background: darkblue
+		transform: translateX(0)
+		transition: transform 700ms ease-out, opacity 700ms ease-out
+		opacity: 1
+		// dev
+		// transform: translateX(101%)
+		&::after
+			content: ''
+			z-index: 2
+			position: absolute
+			opacity: 1
+			top: 0
+			right: 0
+			width: 100%
+			height: 100%
+			background: darkred
+			transition: opacity 1.5s ease-out
+		&.animstart
+			&::after
+				opacity: 0
+		&.animend
+			transform: translateX(101%)
+			opacity: 0
+.line
+	--delay-ratio: 10
+	transform: translateX(101%)
+	will-change: transform
+	transition: transform .7s var(--bazier), opacity 1.2s ease-out
+	text-align: center
+	height: max-content
+	width: max-content
+	opacity: 0
+	transition-delay: calc(var(--delay-ratio) * 1800ms)
+	&.shown
+		opacity: 1
+		transform: translateX(0) 
+	&__container
+		width: max-content
+		@include center()
+		
+		
+		position: relative		
+
+@keyframes welcome
+	0%
+		clip-path: polygon(25% 0%, 100% 0%, 100% 25%, 100% 100%, 25% 100%, 25% 100%, 0% 100%, 0% 0%)
+	20%
+		clip-path: polygon(25% 0%, 100% 0%, 100% 25%, 100% 100%, 25% 100%, 25% 25%, 0% 25%, 0% 0%)
+	40%
+		clip-path: polygon(100% 0%, 100% 0%, 100% 25%, 100% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 0%)
+	60%
+		clip-path: polygon(100% 75%, 100% 75%, 100% 75%, 100% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%)
+		// clip-path: polygon(75% 0%, 100% 0%, 100% 81%, 100% 100%, 67% 100%, 23% 100%, 22% 24%, 78% 25%)
+	80%
+		clip-path: polygon(25% 75%, 25% 75%, 25% 75%, 25% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%)
+	100%
+		clip-path: polygon(75% 75%, 75% 75%, 75% 75%, 75% 75%, 75% 75%, 75% 25%, 75% 25%, 75% 75%)
+		
+main
+	height: 100vh
+	background: $dark
+	width: 100%
+	color: #fff
+	
+.wheel
+	width: 95vmin
+	height: 95vmin 
+	border-radius: 50%
+	background: darkred
+	position: relative
+	flex-direction: column
+	overflow: hidden
+	will-change: transform
+	
+	&__line
+		width: 4px
+		height: 100%
+		position: absolute
+		top: 50%
+		left: 50%
+		background: darkblue
+		z-index: 10
+		transform-origin: center
+		@for $i from 1 through 3
+			&:nth-child(#{$i})
+				transform: translate(-50%, -50%) rotate(calc(#{$i} * 60deg)) 
+			
+
+	&__spinner
+		position: fixed
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -50%)
+		width: 19vmin
+		height: 19vmin
+		border-radius: 50%
+		background: #ce2020
+		z-index: 9
+		border: 4px solid darkblue
+		cursor: pointer
+		font-family: sans-serif
+		text-transform: uppercase
+		font-size: 5vmin
+	&__number
+		position: absolute
+
+		@include center()
+		
+		width: max-content
+		height: max-content
+		color: #fff
+		z-index: 3
+		// padding: 10px 
+		will-change: all
+		overflow: hidden
+		padding: 10px 5px
+		&::after
+			font-size: 20vmin
+			content: attr(data-num)
+			font-family: sans-serif
+			display: inline
+			background-color: var(--bgc)
+		@for $i from 1 through 6
+			&:nth-of-type(#{$i})  
+				--bgc: rgb(#{random(255)}, #{random(255)}, #{random(255)})
+				&::after
+					border-radius: 5000px 50px 50px 50px
+					
+		&:nth-of-type(1)
+			top: 25%
+			left: 25%
+			transform: translate(25%, -50%) rotate(-30deg)
+		&:nth-of-type(2)
+			top: 25%
+			right: 25%
+			transform: translate(-25%, -50%) rotate(30deg)
+		&:nth-of-type(3)
+			top: 50%
+			right: 25%
+			transform: translate(75%, -50%) rotate(90deg)
+		&:nth-of-type(4)
+			bottom: 25%
+			right: 25%
+			transform: translate(-25%, 50%) rotate(150deg)
+		&:nth-of-type(5)
+			bottom: 25%
+			left: 25%
+			transform: translate(25%, 50%) rotate(210deg)
+		&:nth-of-type(6)
+			top: 50%
+			left: 25%
+			transform: translate(-76%, -50%)rotate(270deg)
+		&.winner
+			&::after
+				animation: zoomInOut 500ms var(--bazier)
+	&__container
+		overflow: hidden
+		@include center()
+		
+		height: 100vh
+		width: 100%
+		position: relative
+
+
+.wheel__fake
+	position: fixed
+	left: 50%
+	top: 50%
+	transform: translate(-50%, -50%)
+	width: 95vmin
+	height: 95vmin 
+	border-radius: 50%
+	z-index: 8
+	&::after
+		content: ''
+		display: inline-block
+		position: absolute
+		top: 0
+		left: 50%
+		transform: translate(-50%, -50%) rotate(-90deg)
+		height: 10vmin
+		border-radius: 10px
+		width: 10vmin
+		clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%)
+		background: orange
+			
+
+@keyframes zoomInOut
+	0%
+		transform: scale(1)
+	50%
+		transform: scale(1.5)
+	100%
+		transform: scale(1)
+		
+.resultpopup
+	transform: translateY(101vh)
+	position: fixed
+	top: 0
+	right: 0
+	width: 100%
+	height: 100vh
+	z-index: 31
+	display: grid
+	align-content: stretch
+	align-items: stretch
+	transition: transform 0.4s ease-out
+	grid-template-rows: 1fr 30% 30% 1fr
+	@include plus1025()
+		grid-template-rows: 100px minmax(50%, 1fr) 200px
+		grid-template-columns: 1fr 1fr
+		grid-gap: 10px 100px
+	&.toggled
+		transform: translateY(0)
+	&__bg
+		transform: translateY(101vh)
+		position: fixed
+		width: 100%
+		height: 100vh
+		top: 0
+		right: 0
+		display: flex
+		background-color: rgba($dark, .9)
+		z-index: 30
+		&.toggled
+			transform: none
+	&__header
+		width: 100%
+		height: 100px
+		background-color: darkred
+		color: #fff
+		height: 100%
+		@include center()
+		font-weight: 500
+		font-size: 7vmin
+		text-transform: uppercase
+		@include plus1025()
+			grid-column: 1 / 3
+	&__resetbtn
+		font-size: 5vmin
+		padding: 3vmin 5vmin
+		border-radius: 20px
+		border: 5px solid #fff
+		background-color: darkred
+		cursor: pointer
+		&:hover
+			background-color: #fff
+			color: darkred
+
+	&__footer
+		@include center()
+		font-size: 8vmin
+		height: 100%
+		background-color: darkred
+		color: #fff
+		@include plus1025()
+			height: 200px
+			grid-column: 1 / 3
+	&__image
+		background-color: #fff
+		height: 100%
+		width: 100%
+		object-fit: contain
+	&__winnerInfo
+		width: 100%
+		height: 100%
+		background-color: darkblue
+		color: #fff
+		@include center()
+		font-size: 5vmin
+		flex-direction: column
+		grid-gap: 5vmin
+
+		&__label
+			max-width: 50%
+			text-align: center
+		&__value
+			font-size: 10vmin
+			padding: 2.5% 5%
+			border-radius: 50%
+
+

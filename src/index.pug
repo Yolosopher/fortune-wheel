@@ -1,0 +1,46 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		meta(http-equiv="X-UA-Compatible", content="IE=edge")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		title Fortune Wheel
+		link(rel="stylesheet", href="assets/css/style.css")
+	body
+		.welcomemodal.toanimate
+		.welcomemodal__content.toanimate
+			.line__container
+				h1.line Welcome to my test!
+			.line__container
+				h2.line Here in this fortune wheel
+			.line__container
+				h3.line You can wheel and wheeeel!!!
+			.line__container
+				h1.line 😌😌😌
+
+		main
+			.wheel__container
+				#wheel.wheel
+					.wheel__line
+					.wheel__line
+					.wheel__line
+					span.wheel__number(data-num="1")
+					span.wheel__number(data-num="2") 
+					span.wheel__number(data-num="3") 
+					span.wheel__number(data-num="4") 
+					span.wheel__number(data-num="5") 
+					span.wheel__number(data-num="6")
+				.wheel__fake 
+			button#spin.wheel__spinner spin
+		.resultpopup__bg
+		.resultpopup
+			header.resultpopup__header Hello from Header!
+			
+			img.resultpopup__image(src="assets/img/award.jpg", alt="")
+			.resultpopup__winnerInfo
+				p.resultpopup__winnerInfo__label Andddd the winnnner isssss:
+				p#winnernum.resultpopup__winnerInfo__value 5
+			.resultpopup__footer
+				#resetwheelbtn.resultpopup__resetbtn reset the wheel!
+
+		script(src="assets/js/bundle.min.js") 
